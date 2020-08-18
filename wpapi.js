@@ -23,7 +23,7 @@ function extractRequest(resourceName,callback){
 	var request_options = 
 	{
 	    host: 'en.wikipedia.org',
-	    headers: {'user-agent': 'MyAwesomeImageDl/1.1 (http://example.com/MyCoolTool/; fistoflegend@icloud.com) BasedOnSuperLib/1.4'},
+	    headers: {'user-agent': 'MyAwesomeImageDl/1.1 (http://example.com/MyCoolTool/; myemail@icloud.com) BasedOnSuperLib/1.4'},
 	    path: pathPrefix+foo+pathSuffix
 	};
 
@@ -102,7 +102,7 @@ function request(resourceName,callback,pathPrefix,pathSuffix,isFirst,filename){
 	var request_options = 
 	{
 	    host: 'en.wikipedia.org',
-	    headers: {'user-agent': 'MyAwesomeImageDl/1.1 (http://example.com/MyCoolTool/; fistoflegend@icloud.com) BasedOnSuperLib/1.4'},
+	    headers: {'user-agent': 'MyAwesomeImageDl/1.1 (http://example.com/MyCoolTool/; myemail@icloud.com) BasedOnSuperLib/1.4'},
 	    path: pathPrefix+foo+pathSuffix
 	};
 

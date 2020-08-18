@@ -9,7 +9,7 @@ var server;
 var hostname = "";
 var targetHostname = "myhostname"; //TODO: replace in production for different sites.
 var isInProduction = false;
-var emailAddressForStatusUpdates = "fistoflegend@icloud.com"; //TODO replace in production for diff site
+var emailAddressForStatusUpdates = "myemail@icloud.com"; //TODO replace in production for diff site
 
 child_process.exec("hostname -f", function(err, stdout, stderr) {
 	hostname = stdout.trim();
