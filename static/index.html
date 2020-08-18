@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Knowledge discovery engine">
+    <meta name="keywords" content="">
+    <meta name="author" content="Rahul Iyer">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+    <title>Q and A</title>
+    <style>
+        .centerfy img {
+            margin: 0 auto;
+        }
+        .centerfy {
+            text-align: center;
+        }
+        .jumbotron {
+/*
+            color: #2962b1;
+            background-color: rgba(42, 145, 127, 0.5);
+*/
+        }
+        .btn-outline {
+            color: #563d7c;
+            background-color: transparent;
+            border-color: #563d7c
+        }
+        .btn-outline:hover,
+        .btn-outline:focus,
+        .btn-outline:active {
+            color: #fff;
+            background-color: #563d7c;
+            border-color: #563d7c
+        }
+        .btn-outline-inverse {
+            color: #fff;
+            background-color: transparent;
+            border-color: #cdbfe3
+        }
+        .btn-outline-inverse:hover,
+        .btn-outline-inverse:focus,
+        .btn-outline-inverse:active {
+            color: #563d7c;
+            text-shadow: none;
+            background-color: #fff;
+            border-color: #fff
+        }
+        .big {
+            font-size: 500%;
+        }
+          .ui-autocomplete-category {
+    font-weight: bold;
+    padding: .2em .4em;
+    margin: .8em 0 .2em;
+    line-height: 1.5;
+  }
+  img {
+    max-width: 100%;
+    max-height: 400px;
+}
+
+.row > div.bl {
+  width: 200px;/*example only*/
+  height: 300px;/*example only*/
+}
+.row > div img{
+  max-height: 100%;
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+		<div>
+			<h3>Q and A</h3>
+			<label for="search">Search: </label>
+			<input id="search">
+			<p>Click <a href="/about">here</a> to learn more about this site.</p>
+			<p>Type something you want to learn about. Type atleast three characters, and select a suggestion from the menu that appears. Don't press enter! (minor bug XD), but click on your selection from the dropdown menu until it goes away. The page will refresh! (The site is slow, so be patient!)<br>Search index is being updated - search results will be affected. The index is being built. Try typing something like "acanthacaris" . The index is being updated in alphabetical order, and more results will come in time.</p>
+			<p>Current index updated till words beginning with "nog"</p><p>Type longer words for quicker results (since it will return a smaller set of suggestions)</p>
+		</div>
+		<div id="main">
+		</div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+    <script src="/ajax.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+	<script id="pn" type="text/x-handlebars-template">
+    	<div id="person">
+			<h1>{{name}}</h1>
+
+		</div>
+	</script>
+
+	<script id="pCV" type="text/x-handlebars-template">
+    	<div id="role">
+			<h1>{{role}}</h1>
+		</div>
+		<div class="row">
+			{{#each ftr}}
+			<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 centerfy bl">
+				<a href="#" onclick="onClickLink({{link}})">
+					<img src="{{u}}">
+					<p>{{r}}</p>
+				</a>
+			</div>
+			{{/each}}
+		</div>
+		{{#if wtr.length}}
+		<div class="row">
+			<h3>Posters unavailable for the following movies:</h3>
+			{{#each wtr}}
+				<a href="#" onclick="onClickLink({{link}})">{{r}}</a>
+				<br>
+			{{/each}}
+		</div>
+		{{/if}}
+
+        <hr class="half-rule">
+	</script>
+		<script id="flm" type="text/x-handlebars-template">
+    	<div id="role">
+			<h1>{{name}}</h1>
+		</div>
+		<div class="row">
+			{{#if u}}
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 centerfy">
+						<img src="{{u}}">
+				</div>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 centerfy">
+					{{#each role}}
+						<h3>{{rolename}}</h3>
+						<p>
+						{{#each person}}
+							<span><a href="#" onclick="onClickLink({{link}})">{{n}}</a></span>,
+						{{/each}}
+						</p>
+					{{/each}}
+				</div>
+			{{else}}
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					{{#each role}}
+						<h3>{{rolename}}</h3>
+						<p>
+						{{#each person}}
+							<span><a href="#" onclick="onClickLink({{link}})">{{n}}</a></span>,
+						{{/each}}
+						</p>
+					{{/each}}
+				</div>
+			{{/if}}
+
+		</div>
+        <hr class="half-rule">
+	</script>
+	<script src="/main.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <footer class="footer ">
+        <div class="container">
+        </div>
+    </footer>
+</body>
+
+</html>
